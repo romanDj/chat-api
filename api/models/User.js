@@ -11,14 +11,25 @@ module.exports = db.sequelize.define(
         },
         firstname: {
             type: Sequelize.STRING,
-            allowNull: false
+            defaultValue: '',
+            validate: {
+                notEmpty: {
+                    msg: 'Поле фамилия обязательно для заполнения.'
+                }
+            }
         },
         username: {
             type: Sequelize.TEXT,
-            allowNull: false
+            defaultValue: '',
+            validate: {
+                notEmpty: {
+                    msg: 'Поле имя обязательно для заполнения.'
+                }
+            }
         },
         email: {
             type: Sequelize.STRING,
+            defaultValue: '',
             unique: {
                 args: true,
                 msg: 'Пользователь с такой почтой уже существует'
@@ -27,29 +38,39 @@ module.exports = db.sequelize.define(
                 isEmail: {
                     args: true,
                     msg: 'Не соответствует формату email'
+                },
+                notEmpty: {
+                    msg: 'Поле email обязательно для заполнения.'
                 }
             }
         },
         password: {
             type: Sequelize.STRING,
-            allowNull: false
+            defaultValue: '',
+            validate:{
+                notEmpty: {
+                    msg: 'Поле пароль обязательно для заполнения.'
+                }
+            }
         },
         token: {
             type: Sequelize.STRING
         },
         photo: {
-            type: Sequelize.STRING,
-            allowNull: false
+            type: Sequelize.STRING
         },
         isAdmin: {
-            type: Sequelize.INTEGER
+            type: Sequelize.INTEGER,
+            defaultValue: 0
         },
         birthday: {
             type: Sequelize.DATEONLY,
-            defaultValue: Sequelize.NOW,
-            allowNull: false
+            validate: {
+                notEmpty: {
+                    msg: 'Поле дата рождения обязательно для заполнения.'
+                }
+            }
         },
-
         // ,bar_id: {
         //     type: Sequelize.INTEGER,
         //

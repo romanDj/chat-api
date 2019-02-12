@@ -3,13 +3,12 @@ const app = express();
 const bodyParser = require('body-parser');
 const db = require('./api/database/db');
 const userRoutes = require('./api/routes/users');
-const fileUpload = require('express-fileupload');
 
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended:false }));
-app.use(fileUpload());
+app.use(bodyParser.urlencoded());
+
 //Sync Database
-db.sequelize.sync({force: true}).then(function() {
+db.sequelize.sync({force: false}).then(function() {
     console.log('Nice! Database looks fine')
 }).catch(function(err) {
     console.log(err, "Something went wrong with the Database Update!")
